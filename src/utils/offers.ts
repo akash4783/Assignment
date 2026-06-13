@@ -13,7 +13,7 @@ export function calculateSubtotal(items: CartItems): number {
   return cents
 }
 
-export function applyOffers(items: CartItems, subtotal: number): OfferSaving[] {
+export function applyOffers(items: CartItems): OfferSaving[] {
   const savings: OfferSaving[] = []
 
   // Offer 1: When you buy a Cheese, you get a second Cheese free
@@ -48,7 +48,7 @@ export function applyOffers(items: CartItems, subtotal: number): OfferSaving[] {
 
 export function buildBill(items: CartItems): Bill {
   const subtotal = calculateSubtotal(items)
-  const savings = applyOffers(items, subtotal)
+  const savings = applyOffers(items)
   const total = subtotal + savings.reduce((sum, s) => sum + s.amount, 0)
   return { subtotal, savings, total }
 }
